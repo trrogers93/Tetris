@@ -1,0 +1,73 @@
+package edu.vt.cs5044;
+
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import edu.vt.cs5044.tetris.AI;
+import edu.vt.cs5044.tetris.Board;
+
+/**
+ * 
+ * Test simple and complex boards to confirm that the Artificial 
+ * Intelligence ("AI") system is capable of strategically placing
+ * the pieces by placing an average of at least 125 pieces across
+ * the test boards.
+ *
+ * @author trogers3
+ * @version Jul 3, 2019
+ *
+ */
+public class TetrisAITest
+{
+    private AI brain;
+    
+    /**
+     * Place a description of your method here.
+     *
+     * @throws Exception
+     */
+    @Before
+    public void setUp() throws Exception
+    {
+    
+    brain = new TetrisAI();
+    
+    }
+
+    /**
+     * Place a description of your method here.
+     *
+     */
+    @Test
+    public void testEmptyBoard()
+    {
+        Board emptyBoard = new Board();
+        
+        assertEquals(0, brain.getAverageColumnHeight(emptyBoard));
+        assertEquals(0, brain.getColumnHeightRange(emptyBoard));
+        assertEquals(0, brain.getColumnHeightVariance(emptyBoard));
+        assertEquals(0, brain.getTotalGapCount(emptyBoard));
+        
+    }
+    
+    /**
+     * Place a description of your method here.
+     *
+     */
+    @Test public void simpleBoard()
+    {
+        Board simpleBoard = new Board(
+                "  ##  #  #",
+                "###  ## # ");
+                   
+        assertEquals(1, brain.getAverageColumnHeight(simpleBoard));
+        assertEquals(2, brain.getColumnHeightRange(simpleBoard));
+        assertEquals(9, brain.getColumnHeightVariance(simpleBoard));
+        assertEquals(1, brain.getTotalGapCount(simpleBoard));
+    }
+    
+    
+
+}
